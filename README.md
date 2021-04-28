@@ -140,7 +140,7 @@ doSomething().then(doSomethingElse())
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`
+Primero se ejecuta `doSomething`, cuando la promesa doSomething se resuelve se ejecuta doSomethingElse
 
 ```
 doSomething
@@ -153,8 +153,7 @@ doSomethingElse(undefined)
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta
-
+Primero se ejecuta doSomething, cuando la promesa doSomething se resuelve se ejecuta doSomethingElse y recibe como parámetro el resultado de doSomething. Y por último, cuando la promesa doSomethingElse se resuelve se ejecuta finalHandler y recibe como parámetro el resultado de doSomethingElse.
 ```js
 // Ejemplo 4
 doSomething().then(doSomethingElse)
