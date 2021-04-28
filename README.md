@@ -98,20 +98,56 @@ doSomething()
   })
   .then(finalHandler);
 
+
+```
+doSomething
+|-----------------|
+                  doSomethingElse(undefined)
+                  |------------------|
+                                     finalHandler(resultOfDoSomethingElse)
+                                     |------------------|
+```
+
+
 // Ejemplo 2
 doSomething().then(function () {
   doSomethingElse();
 }).then(finalHandler);
+
+```
+doSomething
+|-----------------|
+                  doSomethingElse(undefined)
+                  |------------------|
+                  finalHandler(undefined)
+                  |------------------|
+```
 
 // Ejemplo 3
 doSomething().then(doSomethingElse())
   .then(finalHandler);
 });
 
+```
+doSomething
+|-----------------|
+doSomethingElse(undefined)
+|---------------------------------|
+                  finalHandler(resultOfDoSomething)
+                  |------------------|
+```
+
 // Ejemplo 4
 doSomething().then(doSomethingElse)
   .then(finalHandler);
-
+```
+doSomething
+|-----------------|
+                  doSomethingElse(resultOfDoSomething)
+                  |------------------|
+                                     finalHandler(resultOfDoSomethingElse)
+                                     |------------------|
+```
 ```
 
 ## Preguntas Prácticas (5pts)
