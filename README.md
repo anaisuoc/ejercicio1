@@ -101,7 +101,7 @@ doSomething()
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta `doSomethingElse` y al no estar definida devuelve el valor `undefined`. Y por último, cuando la promesa `doSomethingElse` se resuelve se ejecuta `finalHandler` y recibe como parámentro el resultado de  `doSomethingElse`.
 
 ```
 doSomething
@@ -121,7 +121,7 @@ doSomething().then(function () {
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta en paralelo `doSomethingElse` y `finalHandler`, ambas no están definidas, por lo que devuelven el valor `undefined`. 
 
 ```
 doSomething
@@ -140,7 +140,7 @@ doSomething().then(doSomethingElse())
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa doSomething se resuelve se ejecuta doSomethingElse
+Primero se ejecuta en paralelo `doSomething` y `doSomethingElse`, la cual devuelve el valor `undefined`, ya que no está definida. Cuando la promesa doSomething se resuelve se ejecuta `finalHandler`  y recibe como parámetro el resultado de `doSomething`.
 
 ```
 doSomething
@@ -150,15 +150,15 @@ doSomethingElse(undefined)
                   finalHandler(resultOfDoSomething)
                   |------------------|
 ```
-
-Se ejecutará en este orden:
-
-Primero se ejecuta doSomething, cuando la promesa doSomething se resuelve se ejecuta doSomethingElse y recibe como parámetro el resultado de doSomething. Y por último, cuando la promesa doSomethingElse se resuelve se ejecuta finalHandler y recibe como parámetro el resultado de doSomethingElse.
 ```js
 // Ejemplo 4
 doSomething().then(doSomethingElse)
   .then(finalHandler);
 ```
+Se ejecutará en este orden:
+
+Primero se ejecuta `doSomething`, cuando la promesa doSomething se resuelve se ejecuta `doSomethingElse` y recibe como parámetro el resultado de `doSomething`. Y por último, cuando la promesa `doSomethingElse` se resuelve se ejecuta `finalHandler` y recibe como parámetro el resultado de `doSomethingElse`.
+
 ```
 doSomething
 |-----------------|
