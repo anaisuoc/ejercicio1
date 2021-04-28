@@ -97,8 +97,12 @@ doSomething()
     return doSomethingElse();
   })
   .then(finalHandler);
-
 ```
+
+Se ejecutará en este orden:
+
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta
+
 ```
 doSomething
 |-----------------|
@@ -114,6 +118,11 @@ doSomething().then(function () {
   doSomethingElse();
 }).then(finalHandler);
 ```
+
+Se ejecutará en este orden:
+
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta
+
 ```
 doSomething
 |-----------------|
@@ -128,6 +137,11 @@ doSomething().then(doSomethingElse())
   .then(finalHandler);
 });
 ```
+
+Se ejecutará en este orden:
+
+Primero se ejecuta `doSomething`
+
 ```
 doSomething
 |-----------------|
@@ -136,6 +150,11 @@ doSomethingElse(undefined)
                   finalHandler(resultOfDoSomething)
                   |------------------|
 ```
+
+Se ejecutará en este orden:
+
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta
+
 ```js
 // Ejemplo 4
 doSomething().then(doSomethingElse)
