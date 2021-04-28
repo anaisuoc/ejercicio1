@@ -98,7 +98,7 @@ doSomething()
   })
   .then(finalHandler);
 
-
+```
 ```
 doSomething
 |-----------------|
@@ -108,12 +108,12 @@ doSomething
                                      |------------------|
 ```
 
-
+```js
 // Ejemplo 2
 doSomething().then(function () {
   doSomethingElse();
 }).then(finalHandler);
-
+```
 ```
 doSomething
 |-----------------|
@@ -122,12 +122,12 @@ doSomething
                   finalHandler(undefined)
                   |------------------|
 ```
-
+```js
 // Ejemplo 3
 doSomething().then(doSomethingElse())
   .then(finalHandler);
 });
-
+```
 ```
 doSomething
 |-----------------|
@@ -136,10 +136,11 @@ doSomethingElse(undefined)
                   finalHandler(resultOfDoSomething)
                   |------------------|
 ```
-
+```js
 // Ejemplo 4
 doSomething().then(doSomethingElse)
   .then(finalHandler);
+```
 ```
 doSomething
 |-----------------|
@@ -148,7 +149,7 @@ doSomething
                                      finalHandler(resultOfDoSomethingElse)
                                      |------------------|
 ```
-```
+
 
 ## Preguntas Prácticas (5pts)
 
