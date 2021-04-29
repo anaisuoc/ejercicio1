@@ -19,7 +19,7 @@ Por ejemplo: una función realiza una tarea que se activa a que ocurra un determ
 
 **- asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con lo demás. Una vez se complete la operación en espera, la ejecuta.
 
-En el siguiente ejemplo se puede observar cómo algunas de las instrucciones se ejecutarán a destiempo. El orden en que lo imprime por consola es: e 'One', 'Three' y 'Two'.
+En el siguiente ejemplo se puede observar cómo algunas de las instrucciones se ejecutarán a destiempo. El orden en que lo imprime por consola es: e 'one', 'three' y 'two'.
 
 ```js
 function one(text) {
