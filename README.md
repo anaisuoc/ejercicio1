@@ -41,6 +41,20 @@ Pero, **¿cómo puede un lenguaje con un único hilo de ejecución pueda ser no 
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
+JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es parte de la arquitectura del motor de JavaScript y el encargado de implementar las operaciones asíncronas o el non-blocking. Debido al event loop JavaScript es un lenguaje dirigido por eventos, lo que significa que no existe un punto de comienzo ni uno final sino que el motor de javascript ejecuta tareas que estén en una pila de ejecución.
+
+Fases fundamentales para el funcionamiento del event loop:
+
+**- Montículo (Heap).** es el lugar (memoria) donde se almacenan los objetos cuando se definen las variables. 
+
+**- Pila de ejecución(Call Stack).** Es una estructura de datos que registra en qué parte de ejecución del programa se encuentra el usuario en ese momento.  Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack al momento en que ocurrió.
+
+**- Cola de tareas(Callback Queue).** Aquí se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado.
+
+**- Event Loop.** El event loop es el que se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
+
+Además, añadir que otro elemento a resaltar en su funcionamiento son las APIs. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Al igual que se utilizan interfaces gráficas para interaccionar con un navegador o procesador de texto, una API implementa ese tipo de comunicación, pero entre aplicaciones. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra.
+
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
 
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
