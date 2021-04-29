@@ -1,31 +1,18 @@
 # PJP PEC 2
 
-## Entrega de la PEC
-
-Una vez hayas realizado las actividades propuestas en este enunciado, la entrega de la PEC se realizará de forma doble:
-
-- Enviar tu PEC 2 al Registro de Evaluación Continua (REC) del campus virtual de la UOC.
-  Deberás crear un archivo ZIP con el contenido del repositorio (recuerda **NO** incluir las carpetas `.git` y `node_modules` en el ZIP) y subir dicho fichero al REC.
-  Puedes poner cualquier nombre que sea identificativo al fichero, por ejemplo, el nombre del repositorio en GitHub.
-- Enviar los cambios de tu repositorio a GitHub Classroom, para ello debes añadir y enviar tus cambios a GitHub, utilizando los comandos add, commit y push.
-  Si no recuerdas cómo ejecutar estos comandos, puedes revisarlos en el enunciado de la PEC 0.
-
-Recuerda que este repositorio lo has clonado del repositorio en GitHub. Cuando trabajes en tu sistema, todos los cambios los harás en tus ficheros locales, los cuales tendrás que añadir y _comitear_ en tu repositorio Git. Estos cambios estarán en tu sistema hasta que hagas _push_ y los envíes al repositorio en GitHub. Puedes hacer varios envíos.
-
 ## Preguntas Teóricas (5pts)
 
-Responde las siguientes preguntas. Para hacerlo, deberás crear un archivo con el nombre `readme.md` y responder en este nuevo archivo.
-
-Adjuntamos algunos recursos que te ayudarán a responder las preguntas:
-
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop
-- https://blog.avenuecode.com/understanding-the-javascript-concurrency-model
-- https://www.freecodecamp.org/news/javascript-concurrency-model-and-event-loop/
-- https://dev.to/sarthaksam/javascript-concurrency-model-4hod
-- http://latentflip.com/loupe
-- https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise
-
 ### PT1 Responde con tus propias palabras a las siguientes cuestiones: (2p)
+
+El modelo de concurrencia de JavaScript es asíncrono (asynchronous), no bloqueante (non-blocking) y con un bucle de eventos (event loop) implementado en un solo hilo (single-threaded).
+
+**- De un solo hilo de ejecución(single-threaded):** Un hilo es un punto concreto de ejecución de un programa, cada hilo solo puede realizar una tarea a la vez. JavScript es un single-threaded, aún con múltiples procesadores, solo puede ejecutar tareas en un solo hilo. Esto significa que no existe forma de ejecutar más de una instrucción a la vez, como en otros lenguajes.
+
+```
+Task A --> Task B --> Task C
+```
+**- no bloqueante (non-blocking):**
+
 
 #### PT1.1: ¿Cómo funciona el modelo de concurrencia de JavaScript? (0.4p)
 
