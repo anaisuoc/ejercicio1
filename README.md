@@ -53,7 +53,7 @@ Fases fundamentales para el funcionamiento del event loop:
 
 **- Event Loop.** El event loop es el que se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
 
-Además, añadir que otro elemento a resaltar en su funcionamiento son las APIs. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Al igual que se utilizan interfaces gráficas para interaccionar con un navegador o procesador de texto, una API implementa ese tipo de comunicación, pero entre aplicaciones. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra.
+Adicional al motor JavaScript, están las “Web APIs” que son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Al igual que se utilizan interfaces gráficas para interaccionar con un navegador o procesador de texto, una API implementa ese tipo de comunicación, pero entre aplicaciones. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra.
 
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
 
