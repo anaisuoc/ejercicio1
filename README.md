@@ -4,6 +4,8 @@
 
 ### PT1 Responde con tus propias palabras a las siguientes cuestiones: (2p)
 
+#### PT1.1: ¿Cómo funciona el modelo de concurrencia de JavaScript? (0.4p)
+
 El modelo de concurrencia de JavaScript es asíncrono (asynchronous), no bloqueante (non-blocking) y con un bucle de eventos (event loop) implementado en un solo hilo (single-threaded).
 
 **- De un solo hilo de ejecución(single-threaded):** Un hilo es un punto concreto de ejecución de un programa, cada hilo solo puede realizar una tarea a la vez. JavScript es un single-threaded, aún con múltiples procesadores, solo puede ejecutar tareas en un solo hilo. Esto significa que no existe forma de ejecutar más de una instrucción a la vez, como en otros lenguajes.
@@ -14,7 +16,6 @@ Task A --> Task B --> Task C
 **- no bloqueante (non-blocking):**
 
 
-#### PT1.1: ¿Cómo funciona el modelo de concurrencia de JavaScript? (0.4p)
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
