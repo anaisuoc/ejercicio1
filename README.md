@@ -31,7 +31,7 @@ console.log('Three');
 
 **- concurrente (concurrent).** Es la habilidad para ejecutar dos o más procesos computacionales simultáneamente. Que varias tareas progresen simultáneamente no tiene porque significar que sucedan al mismo tiempo, a diferencia del paralelismo, en el cual dos o más tareas se ejecutan en el mismo instante de tiempo.
 
-Pero, ¿cómo puede un lenguaje con un único hilo de ejecución pueda ser no bloqueante, concurrente y asincrónico? Esto es debido a que la concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
+Pero, **¿cómo puede un lenguaje con un único hilo de ejecución pueda ser no bloqueante, concurrente y asincrónico?** Esto es debido a que la concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
