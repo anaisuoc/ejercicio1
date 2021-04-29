@@ -17,9 +17,20 @@ Task A --> Task B --> Task C
 
 Por ejemplo: una función realiza una tarea que se activa a que ocurra un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje bloqueante, se quedaría bloqueado esperando a que el usuario activase la tarea con un click, no se podrían seguir ejecutando las demás funciones. 
 
-**- no bloqueante (non-blocking).**
+**- asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con lo demás. Una vez se complete la operación en espera, la ejecuta.
 
-**- no bloqueante (non-blocking).**
+En el siguiente ejemplo se puede observar cómo algunas de las instrucciones se ejecutarán a destiempo.
+
+```js
+console.log('One');
+setTimeout(_ => {
+  console.log('Two');
+},1000);
+console.log('Three');
+```
+El orden en que lo imprime por consola es: e 'One', 'Three' y 'Two'. Esto es debido a la utilización del método setTimeout(), el cual difiere la ejecución 1000 milisegundos (en este caso).
+
+**- concurrente (concurrent).** Es la habilidad para ejecutar dos o más procesos computacionales simultáneamente. Que varias tareas progresen simultáneamente no tiene porque significar que sucedan al mismo tiempo, a diferencia del paralelismo, en el cual dos o más tareas se ejecutan en el mismo instante de tiempo.
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
