@@ -22,11 +22,17 @@ Por ejemplo: una función realiza una tarea que se activa a que ocurra un determ
 En el siguiente ejemplo se puede observar cómo algunas de las instrucciones se ejecutarán a destiempo. El orden en que lo imprime por consola es: e 'One', 'Three' y 'Two'.
 
 ```js
-console.log('One');
-setTimeout(_ => {
-  console.log('Two');
-},1000);
-console.log('Three');
+function one(text) {
+  console.log('Number ' + text);
+}
+one('one');
+
+setTimeout(() => one('two'), 0);
+
+function three(text) {
+  console.log('Number ' + text);
+}
+three('three');
 ```
 
 **- concurrente (concurrent).** Es la habilidad para ejecutar dos o más procesos computacionales simultáneamente. Que varias tareas progresen simultáneamente no tiene porque significar que sucedan al mismo tiempo, a diferencia del paralelismo, en el cual dos o más tareas se ejecutan en el mismo instante de tiempo.
