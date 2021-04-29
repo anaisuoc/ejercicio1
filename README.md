@@ -15,6 +15,9 @@ Task A --> Task B --> Task C
 ```
 **- no bloqueante (non-blocking).** Es usual que las tareas que realizan los lenguajes de programación requieran de un tiempo de ejecución para procesarse. En el caso de los lenguajes de programación no bloqueantes, como es el caso de JavaScript, las tareas que se llevan a cabo no queden bloqueadas hasta su finalización. Se libera el flujo de ejecución, de modo que el proceso que inició la tarea puede atender otras necesidades del lenguaje.
 
+Por ejemplo: una función realiza una tarea que se activa con un click de ratón del usuario. Si se tratase de un lenguaje bloqueante, hasta que el usuario no hiciera click, no se podrían seguir ejecutando las demás funciones, sino que se quedaría bloqueado esperando a que se terminase esa tarea. 
+
+
 
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
