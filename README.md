@@ -67,6 +67,20 @@ Una solución para resolver este problema, es que la función que tarda mucho ti
 
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
 
+Las promesas son objetos que permiten gestionar situaciones futuras en el flujo de ejecución de un programa. Como no se sabe cuándo va a estar disponible, todas las operaciones dependientes de ese valor, tendrán que posponerse en el tiempo. 
+
+Las promesas se crean usando un constructor llamado Promise y pasándole una función que recibe dos parámetros, resolve y reject.
+
+Aunque en Javascript se introducen en el estándar en ES6, se vienen usando desde hace tiempo, ya que varias librerías las habían implementado para solucionar sus necesidades de una manera más elegante.
+
+Los 3 posibles estados de una promesa son:
+
+**- Pendiente.** Estado inicial, antes de que la promesa sea resulta o rechazada.
+**- Resuelta.** Promesa completada. Pasará a estar resuelta en el momento que se llame al parámetro resolve, ejecutándose la función que se ha introducido en el método .then. 
+**- Rechazada.** Promesa fallida. Pasará a estar rechazada en el momento que se llame al parámetro reject. Usualmente se lanza un error con el motivo de ese rechazo, ejecutándose la función que se ha introducido en el método .catch.
+
+ Su relación con el event loop es que las promesas son un concepto para resolver el problema de asincronía de una forma mucho más elegante y práctica en JavaScript, y el event loop es el que se encarga de implementar las operaciones asíncronas. Esto facilita el control de flujos de datos asíncronos en una aplicación, ya que JavaScript solo puede ejecutar una acción al mismo tiempo.
+
 #### PT1.5: ¿Qué es una función asíncrona? ¿Para que sirve? ¿Qué relación tiene con las promesas? ¿Qué relación tiene con el _event loop_? (0.4p)
 
 ### PT2: Explica con tus propias palabras cómo procesa JavaScript los siguientes fragmentos de código y por qué. (1p)
