@@ -243,3 +243,8 @@ La aproximación de _callbacks_ ha sido durante mucho tiempo la más utilizada e
 - ¿Qué pasa si necesitamos los resultados de dos carreras?
 - ¿Cómo podemos crear una función que un _callback_ pasando dos resultados a la vez?
 
+
+Para poder devolver los resultados de dos carreras se podrá utilizar Promises.all(), uno de los 6 métodos estáticos de la clase Promise. Permite agrupar múltiples promesas y devolver una nueva. Esta nueva promesa es resuelta en cuanto todas las promesas listadas hayan sido concluidas con éxito, en el caso de que alguna se rechace, no se llegará a ejecutar.
+Además, hay que tener en cuenta, que el orden de los miembros del array es el mismo que el de las promesas que los originan. Aunque la primera promesa es la que toma más tiempo en resolverse, es aún la primera en el array de resultados.
+
+
