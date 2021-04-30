@@ -131,7 +131,17 @@ setTimeout(function timeout3() {
 setTimeout(function timeout4() {
   console.log('timeout4');
 }, 0);
+
+//timeout4
+//timeout2
+//timeout3
+//timeout1
+
 ```
+
+Todas son funciones asíncronas definidas dentro del método setTimeOut(). En primer lugar se inicializa la función timeout1(), en segundo lugar la función timeout2(), en tercer lugar la función timeout3() y en último lugar, la timeout4()
+
+A medida que se van inicializando son enviadas a la Web Api, en la cual permanencen hasta que el tiempo de espera se cumpla. Una vez finalizado el tiempo, se envían al callback queue.Cuando el call stack esté vacío, se irán enviado las funciones en el orden que fueron llegando al callback. Es por ello que la primera función que se muestra por consola es timeout4, ya que es la que menos tiempo presenta a a retrasar la ejecución de la función, Y así sucesivamente.
 
 ### PT3: Pregunta promesas (2p)
 
