@@ -236,29 +236,6 @@ doSomething
 
 ## Preguntas Prácticas (5pts)
 
-**Notas**:
-
-- Las siguientes funciones debes implementarlas en el archivo `exercices.js`.
-- El fichero `exercises.test.js` define una serie de test para validar las funciones que debes implementar. Asegúrate que tus funciones **pasan** los tests (utiliza el comando `npm t` para lanzar los tests, tal y como hiciste en la PEC 0).
-- No debes modificar el código del fichero `exercises.test.js`.
-
-### PP1: Implementar función utilizando `xmlhttprequest` y `fetch` (1p)
-
-El caso de uso más habitual de la asincronía en JavaScript es realizar llamadas al servidor.
-
-La primera parte de este ejercicio consiste en implementar una función `listResultsCallback`, que permite obtener los resultados de una carrera de F1 para una temporada concreta, haciendo uso de la API [XMLHTTPRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest) del navegador.
-
-Esta función recibe dos parámetros numéricos:
-
-- `year`: Temporada de F1 de la que queremos obtener datos.
-- `stage`: Número de carrera de la correspondiente temporada de la que queremos obtener datos.
-
-y un tercer parámetro `callback`. Este _callback_ es una función que se ejecutará una vez se obtengan los resultados del servidor.
-
-Esta función debe hacer uso de [la API de F1 de ergast.com](https://ergast.com/mrd/methods/results/), por ejemplo, para obtener los resultados de la primera etapa de 2020 hay que llamar al _endpoint_:
-
-> https://ergast.com/api/f1/2020/1/results.json
-
 ### PP2: Crear un _wrapper_ de la función utilizando promesas (1p)
 
 La aproximación de _callbacks_ ha sido durante mucho tiempo la más utilizada en el ecosistema de JavaScript. Sin embargo tenía muchos problemas relacionados. Responde a las siguientes preguntas:
@@ -266,28 +243,3 @@ La aproximación de _callbacks_ ha sido durante mucho tiempo la más utilizada e
 - ¿Qué pasa si necesitamos los resultados de dos carreras?
 - ¿Cómo podemos crear una función que un _callback_ pasando dos resultados a la vez?
 
-La asincronía basada en _callbacks_ se vuelve muy compleja a medida que la aplicación crece produciéndose el fenómeno del [callback hell](http://callbackhell.com/). Para evitar esto aparecen en JavaScript las promesas.
-
-El objetivo de este ejercicio es implementar la función `listResultsPromise`, que funciona igual que `listResultsCallback`, pero en lugar de recibir como tercer parámetro un _callback_ nos va a devolver una promesa.
-
-### PP3: Reimplementar la función usando _fetch_ (1p)
-
-Volver a implementar la función anterior utilizando la api de `fetch` del navegador.
-
-La función debe cumplir estos requisitos:
-
-- El nombre de la función debe ser `list`
-- Debe devolver una promesa con la lista de resultados
-- Debe utilizar la API de `fetch`
-
-### PP4: Ejercicio sencillo de promesas (1p)
-
-Implementar una función llamada `list2ResultsCallback(callback)` que recibe el parámetro _callback_. Esta función debe pedir los resultados de dos carreras, reutilizando la función `listResultsCallback`. En cuanto se disponga de ambos resultados, se debe lanzar la función de _callback_.
-
-A continuación, implementar una función  `list2ResultsPromise()` que funcione igual que `list2ResultsCallback`, pero utilizando promesas.
-
-### PP5: Ejercicio intermedio de promesas (1p)
-
-Implementar una función llamada `getNationality(driverId)` que recibe como parámetro el identificador de un piloto y devuelve una promesa que se resuelve con solamente un string que representa la nacionalidad del piloto.
-
-A continuación, implementar una función `listNationalities(year, stage)` que dado un año y una etapa de una carrera, devuelva una promesa que se resuelve con un array de strings que contiene las nacionalidades de los 5 primeros clasificados.
