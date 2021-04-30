@@ -45,8 +45,6 @@ JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es par
 
 Fases fundamentales para el funcionamiento del event loop:
 
-**- Montículo (Memory Heap).** Es el lugar (memoria) donde se almacenan los objetos cuando se definen las variables. 
-
 **- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa, registrando en qué parte del programa estamos. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack al momento en que ocurrió.
 
 **- Web APIs.** Adicionales al motor JavaScript, las Web APIS son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el lugar en el que se agregan y permanencen las llamadas a las Web APIs hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP o un temporizador. Una vez que se active una acción, se agrega una función de Callback a la Callback Queue.
@@ -54,7 +52,7 @@ Fases fundamentales para el funcionamiento del event loop:
 
 **- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. Tamibén funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido.
 
-El event loop se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
+**- Bucle de eventos(Envent loop).** Se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
 
 
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
@@ -115,10 +113,7 @@ hello('bar');
 // Hello bar
 // Hello Foo
 ```
-
-Primero se inicializa la función asíncrona definida dentro del método setTimeOut(), en la cual se invoca la función hello(). Si bien el timeout de la función anónima es 0,  al llamar a una Web Api esta es enviada a la callback queue. A continuación, se inicializa la función hello() y en el momento en que se resuelva, cuando el stack esté vacío, la función asíncrona que está en el callback queue es enviada al call stack y comienza a ejecutarse.
-
-Como se puede ver en la ejecución no se queda bloqueada en setTimeout() ya que imprime la instrucción que le sigue primero.
+La función hello(), aún siendo lo primero que se define, lo primero que se invoca es el metodo setTimeout(), el cual es enviado del call stack a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut() (0 milisegundos).  Una vez transcurrido ese tiempo, es enviada al callback queue. En el momento que el método setTimout() abadona el call stack, se produce la llamada de la función hello(), ejecutándose y mostrando el string "Hello bar" por consola. En el momento en que el call stack esté vacío, la función asíncrona situada en el call back queue es enviada al call stack, ejecutándose y mostrando el  string "Hello Foo" por consola.
 
 Fragmento 2:
 
@@ -143,9 +138,9 @@ setTimeout(function timeout4() {
 
 ```
 
-Todas son funciones asíncronas definidas dentro del método setTimeOut(). En primer lugar se inicializa la función timeout1(); en segundo lugar, la función timeout2(); en tercer lugar, la función timeout3() y en último lugar, la función timeout4().
+Todas son funciones asíncronas definidas dentro del método setTimeOut(). En primer lugar se invocan la función timeout1(); en segundo lugar, la función timeout2(); en tercer lugar, la función timeout3() y en último lugar, la función timeout4().
 
-A medida que las funciones asíncronas se van inicializando son llamadas y enviadas a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut(). Una vez transcurrido ese tiempo, son enviadas al callback queue. En el momento en que el call stack esté vacío, las funciónes asíncrona son enviadas al call stack en el orden en el que fueron llegando al callback queue, pudiendo comenzar a ejecutarse. La primera función que se muestra por consola es timeout4, ya que es a la se le especificó el menor tiempo de las cuatro funciones para ejecutarse, y así sucesivamente.
+A medida que las funciones asíncronas se van invocando son llamadas y enviadas a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut(). Una vez transcurrido ese tiempo, son enviadas al callback queue. En el momento en que el call stack esté vacío, las funciónes asíncrona son enviadas al call stack en el orden en el que fueron llegando al callback queue, pudiendo comenzar a ejecutarse. La primera función que se muestra por consola es timeout4, ya que es a la se le especificó el menor tiempo de las cuatro funciones para ejecutarse, y así sucesivamente.
 
 ### PT3: Pregunta promesas (2p)
 
@@ -260,7 +255,10 @@ La aproximación de _callbacks_ ha sido durante mucho tiempo la más utilizada e
 - ¿Cómo podemos crear una función que un _callback_ pasando dos resultados a la vez?
 
 
-Para poder devolver los resultados de dos carreras se podrá utilizar Promises.all(), uno de los 6 métodos estáticos de la clase Promise. Permite agrupar múltiples promesas y devolver una nueva. Esta nueva promesa es resuelta en cuanto todas las promesas listadas hayan sido concluidas con éxito, en el caso de que alguna se rechace, no se llegará a ejecutar.
-Además, hay que tener en cuenta, que el orden de los miembros del array es el mismo que el de las promesas que los originan. Aunque la primera promesa es la que toma más tiempo en resolverse, es aún la primera en el array de resultados.
+Para obtener el resultado de dos carreras se necesita, en primer lugar, llamar a la funcion "listResultsCallback", y en su funcion de callback, invocarla de nuevo pasando por parametro el resultado de la primera carrera. Y por último, en el callback de esta ultima, pasar los resultados de ambas carreras.
 
-
+```js
+function list2ResultsCallback(callback) {
+	listResultsCallback(2019, 1, (r1) => listResultsCallback(2020, 2, (r2) => callback([r1, r2])));
+}
+```
