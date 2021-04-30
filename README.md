@@ -8,34 +8,37 @@
 
 El modelo de concurrencia de JavaScript es:
 
-**- De un solo hilo de ejecución(single-threaded).** Un hilo es un punto concreto de ejecución de un programa, cada hilo solo puede realizar una tarea a la vez. JavScript es un single-threaded, aún con múltiples procesadores, solo puede ejecutar tareas en un solo hilo.
+**- De un solo hilo de ejecución(single-threaded).** Un hilo es la unidad básica de ejecución de un proceso, cada hilo solo puede realizar una tarea a la vez. JavScript es un single-threaded, aún con múltiples procesadores, solo puede ejecutar tareas en un solo hilo.
 
 ```
 Task A --> Task B --> Task C
 ```
-**- no bloqueante (non-blocking).** Es usual que las tareas que realizan los lenguajes de programación requieran de un tiempo de ejecución para procesarse. En el caso de los lenguajes de programación no bloqueantes, como es el caso de JavaScript, las tareas que se llevan a cabo no queden bloqueadas hasta su finalización. Se libera el flujo de ejecución, de modo que el proceso que inició la tarea puede atender otras necesidades del lenguaje.
 
-Por ejemplo: una función realiza una tarea que se activa a que ocurra un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje bloqueante, se quedaría bloqueado esperando a que el usuario activase la tarea con un click, no se podrían seguir ejecutando las demás funciones. 
+**- No bloqueante (non-blocking).** JavaScript es un lenguaje no bloqueante, lo que permite que las tareas que se lleven a cabo no se queden bloqueadas espezando a ser finalizadas. Evitando a su vez, que el thread no quede bloqueado en estado de espera. 
 
-**- asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con lo demás. Una vez se complete la operación en espera, la ejecuta.
+Por ejemplo: La creación de una función que realiza una tarea y que se activa en caso de que se produzca un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje blocking, se quedaría bloqueado esperando a que el usuario activase la tarea con un click, no se podrían seguir ejecutando las demás funciones. 
 
-En el siguiente ejemplo se puede observar cómo algunas de las instrucciones se ejecutarán a destiempo. El orden en que lo imprime por consola es: e 'one', 'three' y 'two'.
+**- Asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con lo demás. Una vez se complete la operación en espera, la ejecuta.
+
+En el siguiente ejemplo se puede observar la asicronía de JavaScript. El orden en que lo imprime por consola es: 'one', 'three' y 'two'.
+
+El segundo string que se imprime por consola es 'three' y no 'two' debido a que si bien el timeout de la función anónima es 0,  al llamar a una Web Api esta es enviada a la callback queue.
 
 ```js
-function one(text) {
-  console.log('Number ' + text);
+function one(text_1) {
+  console.log(text_1);
 }
 one('one');
 
 setTimeout(() => one('two'), 0);
 
-function three(text) {
-  console.log('Number ' + text);
+function three(text_2) {
+  console.log(text_2);
 }
 three('three');
 ```
 
-**- concurrente (concurrent).** Es la habilidad para ejecutar dos o más procesos computacionales simultáneamente. Que varias tareas progresen simultáneamente no tiene porque significar que sucedan al mismo tiempo, a diferencia del paralelismo, en el cual dos o más tareas se ejecutan en el mismo instante de tiempo.
+**- Concurrente (concurrent).** Es la habilidad para ejecutar dos o más procesos simultáneamente. Que varias tareas progresen simultáneamente no tiene por qué significar que sucedan al mismo tiempo, a diferencia del paralelismo, en el cual dos o más tareas se ejecutan en el mismo instante de tiempo.
 
 Pero, **¿cómo puede un lenguaje con un único hilo de ejecución pueda ser no bloqueante, concurrente y asincrónico?** Esto es debido a que la concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
 
@@ -45,25 +48,25 @@ JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es par
 
 Fases fundamentales para el funcionamiento del event loop:
 
-**- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa, registrando en qué parte del programa estamos. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack al momento en que ocurrió.
+**- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al call stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack del momento en que ocurrió.
 
-**- Web APIs.** Adicionales al motor JavaScript, las Web APIS son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el lugar en el que se agregan y permanencen las llamadas a las Web APIs hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP o un temporizador. Una vez que se active una acción, se agrega una función de Callback a la Callback Queue.
+**- Web APIs.** Adicionales al motor JavaScript, las Web APIS son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el espacio en el que se agregan y permanencen las llamadas a las Web APIs hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP o un temporizador. Una vez que se active una acción, se agrega una función de Callback a la Callback Queue.
 
 
-**- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. Tamibén funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido.
+**- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. También funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido.
 
 **- Bucle de eventos(Envent loop).** Se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
 
 
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
 
-Si una función del stack tarda mucho tiempo o se llama a si misma recursivamente, el navegador no puede procesar, no puede ejecutar ningún otro código, se quedaría bloqueado. La mayoría de los navegadores ante este escenario de bloqueo muestran un mensaje de alerta en el que sugieren detener la tarea con la página completa. 
+Si una función del stack tarda mucho tiempo o se llama a si misma recursivamente, el navegador no puede ejecutar ningún otro código, se quedaría bloqueado. La mayoría de los navegadores ante este escenario de bloqueo muestran un mensaje de alerta en el que sugieren detener la tarea con la página completa. 
 
-En el caso de una función recursiva, se produciría el llamado Overflowing.  Comenzaría a llamarse a sí misma sin condiciones de terminación, agregándose a la Pila de ejecución una y otra vez, alcanzando el tamaño máximo de la misma. 
+En el caso de una función recursiva, se produciría el llamado Overflowing. Comenzaría a llamarse a sí misma sin condiciones de terminación, agregándose a la Pila de ejecución una y otra vez y alcanzando el tamaño máximo de la misma. 
 
-Por lo tanto, al igual que el resto del código, las tareas encoladas se quedarán bloqueadas sin poder ejecutarse. Son tareas que se ejecutan en segundo plano con el fin de no recargar el servidor, bien sea 1 segundo o 1 hora después de haber sido agregados al Callback Queue.
+Por lo tanto, al igual que el resto del código, las tareas encoladas se quedarán bloqueadas sin poder ejecutarse. Son tareas que se ejecutan en segundo plano con el fin de no recargar el servidor, bien sea 1 segundo o 1 hora después de haber sido agregadas al Callback Queue.
 
-Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si misma recursivamente (práctica no recomendable) sea una función asíncrona. Esto permitirá que vaya al Callback Queue, evitando que se apile en el Call Stack. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único Call Stack.
+Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si misma recursivamente (práctica no recomendable) fuera una función asíncrona. Esto permitirçia que se agregara al Callback Queue, evitando que se apile en el Call Stack. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único Call Stack.
 
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
 
@@ -89,7 +92,7 @@ Las funciones asíncronas son aquellas que permiten devolver el control al progr
 
 Las funciones asíncronas son de gran utilidad para:
 
-- Agiliza el proceso de ejecución, contribuyendo a tener una mejor respuesta en las aplicaciones y reduciendo el tiempo de espera del cliente
+- Agilizar el proceso de ejecución, contribuyendo a tener una mejor respuesta en las aplicaciones y reduciendo el tiempo de espera del cliente
 - Evitar que se bloquee el hilo principal de ejecución.
 - Realizar tareas que tienen que esperar a que se produzca un determinado suceso (como puede ser un click del usuario), y reaccionar realizando otra tarea solo cuando dicho suceso ocurra.
 
