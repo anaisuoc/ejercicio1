@@ -47,7 +47,7 @@ Fases fundamentales para el funcionamiento del event loop:
 
 **- Montículo (Memory Heap).** es el lugar (memoria) donde se almacenan los objetos cuando se definen las variables. 
 
-**- Pila de ejecución(Call Stack).** Es una estructura de datos que registra en qué parte de ejecución del programa se encuentra el usuario en ese momento.  Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack al momento en que ocurrió.
+**- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa, registrando en qué parte del programa estamos. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack al momento en que ocurrió.
 
 **- Cola de tareas(Callback Queue).** Aquí se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado.
 
