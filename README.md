@@ -45,13 +45,14 @@ JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es par
 
 Fases fundamentales para el funcionamiento del event loop:
 
-**- Montículo (Memory Heap).** es el lugar (memoria) donde se almacenan los objetos cuando se definen las variables. 
+**- Montículo (Memory Heap).** Es el lugar (memoria) donde se almacenan los objetos cuando se definen las variables. 
 
 **- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa, registrando en qué parte del programa estamos. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack al momento en que ocurrió.
 
-**- Web APIs.** Adicional al motor JavaScript, son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra.
+**- Web APIs.** Adicionales al motor JavaScript, las Web APIS son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el lugar en el que se agregan y permanencen las llamadas a las Web APIs hasta el momento en el que se activa una función. La acción puede ser un evento de click, una solicitud HTTP o un temporizador. Una vez que se activa una acción, se agrega una función de Callback a la Callback Queue.
 
-**- Cola de tareas(Callback Queue).** Aquí se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado.
+
+**- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado.
 
 El event loop se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
 
