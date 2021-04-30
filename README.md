@@ -109,6 +109,9 @@ function hello(text) {
 
 setTimeout(() => hello('Foo'), 0);
 hello('bar');
+
+// Hello bar
+// Hello Foo
 ```
 
 Fragmento 2:
