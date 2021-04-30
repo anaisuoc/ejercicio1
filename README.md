@@ -53,9 +53,17 @@ Fases fundamentales para el funcionamiento del event loop:
 
 **- Event Loop.** El event loop es el que se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
 
-Adicional al motor JavaScript, están las “Web APIs” que son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Al igual que se utilizan interfaces gráficas para interaccionar con un navegador o procesador de texto, una API implementa ese tipo de comunicación, pero entre aplicaciones. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra.
+Adicional al motor JavaScript, están las “Web APIs” que son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra.
 
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
+
+Si una función del stack tarda mucho tiempo o se llama a si misma recursivamente, el navegador no puede procesar, no puede ejecutar ningún otro código, se quedaría bloqueado. La mayoría de los navegadores ante este escenario de bloqueo muestran un mensaje de alerta en el que sugieren detener la tarea con la página completa. 
+
+En el caso de una función recursiva, se produciría el llamado Overflowing.  Comenzaría a llamarse a sí misma sin condiciones de terminación, agregándose a la Pila de ejecución una y otra vez, alcanzando el tamaño máximo de la misma. 
+
+Por lo tanto, al igual que el resto del código, las tareas encoladas se quedarán bloqueadas sin poder ejecutarse. Son tareas que se ejecutan en segundo plano con el fin de no recargar el servidor, bien sea 1 segundo o 1 hora después de haber sido agregados al Callback Queue.
+
+Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si misma recursivamente (práctica no recomendable) sea una función asíncrona. Esto permitirá que vaya al Callback Queue, evitando que se apile en el Call Stack. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único Call Stack.
 
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
 
