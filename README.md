@@ -117,6 +117,8 @@ hello('bar');
 
 Primero se inicializa la función asíncrona definida dentro del método setTimeOut(), en la cual se invoca la función hello(). Si bien el timeout de la función anónima es 0,  al llamar a una Web Api esta es enviada a la callback queue. A continuación, se inicializa la función hello() y en el momento en que se resuelva, cuando el stack esté vacío, la función asíncrona que está en el callback queue es enviada al call stack y comienza a ejecutarse.
 
+Como se puede ver en la ejecución no se queda bloqueada en setTimeout() ya que imprime la instrucción que le sigue primero.
+
 Fragmento 2:
 
 ```js
