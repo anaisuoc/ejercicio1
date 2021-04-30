@@ -85,6 +85,19 @@ Los 3 posibles estados de una promesa son:
 
 #### PT1.5: ¿Qué es una función asíncrona? ¿Para que sirve? ¿Qué relación tiene con las promesas? ¿Qué relación tiene con el _event loop_? (0.4p)
 
+Las funciones asíncronas son aquellas que permiten devolver el control al programa antes de que hayan terminado mientras siguen operando en segundo plano.  Si una tarea de un programa queda bloqueada dentro de un proceso sincrónico, la aplicación completa debe esperar. En cambio con un proceso asíncrono, la aplicación puede continuar con otro trabajo hasta que la tarea potencialmente bloqueante o síncrona finaliza.
+
+Las funciones asíncronas son de gran utilidad para:
+
+- Agiliza el proceso de ejecución, contribuyendo a tener una mejor respuesta en las aplicaciones y reduciendo el tiempo de espera del cliente
+- Evitar que se bloquee el hilo principal de ejecución.
+- Realizar tareas que tienen que esperar a que se produzca un determinado suceso (como puede ser un click del usuario), y reaccionar realizando otra tarea solo cuando dicho suceso ocurra.
+
+En Javascript existen varias formas de gestionar la asincronía: mediante callbacks (la forma más clásica de gestionar la asincronía en Javascript), promesas (Una forma más moderna y actual de gestionar la asincronía.), async/await o top-level await (una variación de la anterior, donde no es necesario usar async).
+
+ Es habitual que existan múltiples tareas asíncronas, dichas tareas puede que terminen resueltas o rechazadas e incluso que dependan de otras, por lo que deben respetar un cierto orden. Además, es habitual que no se conozca previamente cuanto tiempo va a tardar en terminar una tarea, por lo que es de gran importancia un mecanismo para controlar todos estos factores. Aquí es donde entra la utilización de las promesas, previamente explicadas en el punto anterior. Todo ello se pone en relación con el event loop, el encargado de implementar dichas operaciones asíncronas. 
+
+
 ### PT2: Explica con tus propias palabras cómo procesa JavaScript los siguientes fragmentos de código y por qué. (1p)
 
 Fragmento 1:
