@@ -76,7 +76,9 @@ Aunque en Javascript se introducen en el estándar en ES6, se vienen usando desd
 Los 3 posibles estados de una promesa son:
 
 **- Pendiente.** Estado inicial, antes de que la promesa sea resulta o rechazada.
+
 **- Resuelta.** Promesa completada. Pasará a estar resuelta en el momento que se llame al parámetro resolve, ejecutándose la función que se ha introducido en el método .then. 
+
 **- Rechazada.** Promesa fallida. Pasará a estar rechazada en el momento que se llame al parámetro reject. Usualmente se lanza un error con el motivo de ese rechazo, ejecutándose la función que se ha introducido en el método .catch.
 
  Su relación con el event loop es que las promesas son un concepto para resolver el problema de asincronía de una forma mucho más elegante y práctica en JavaScript, y el event loop es el que se encarga de implementar las operaciones asíncronas. Esto facilita el control de flujos de datos asíncronos en una aplicación, ya que JavaScript solo puede ejecutar una acción al mismo tiempo.
