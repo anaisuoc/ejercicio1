@@ -52,7 +52,7 @@ Fases fundamentales para el funcionamiento del event loop:
 **- Web APIs.** Adicionales al motor JavaScript, las Web APIS son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el lugar en el que se agregan y permanencen las llamadas a las Web APIs hasta el momento en el que se activa una función. La acción puede ser un evento de click, una solicitud HTTP o un temporizador. Una vez que se activa una acción, se agrega una función de Callback a la Callback Queue.
 
 
-**- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado.
+**- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. Tamibén funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido.
 
 El event loop se encarga de revisar que el call stack esté vacío para añadir lo que está dentro del callback queue y ejecutarlo. 
 
