@@ -41,7 +41,7 @@ Pero, **¿cómo puede un lenguaje con un único hilo de ejecución pueda ser no 
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
-JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es parte de la arquitectura del motor de JavaScript y el encargado de implementar las operaciones asíncronas o el non-blocking. Debido al event loop JavaScript es un lenguaje dirigido por eventos, lo que significa que no existe un punto de comienzo ni uno final sino que el motor de javascript ejecuta tareas que estén en una pila de ejecución.
+JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es parte de la arquitectura del motor de JavaScript y el encargado de implementar las operaciones asíncronas o el non-blocking. Debido al event loop JavaScript es un lenguaje dirigido por eventos, lo que significa que no existe un punto de comienzo ni uno final sino que el motor de javascript ejecuta tareas que estén en una pila de ejecución. 
 
 Fases fundamentales para el funcionamiento del event loop:
 
