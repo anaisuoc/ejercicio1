@@ -79,7 +79,7 @@ Las funciones asíncronas son de gran utilidad para:
 
 - Realizar tareas que tienen que esperar a que se produzca un determinado suceso (como puede ser un click del usuario), y reaccionar realizando otra tarea solo cuando dicho suceso ocurra.
 
-Existen varias formas de gestionar la asincronía: mediante _callbacks_ (la forma más clásica de gestionar la asincronía en Javascript), promesas (una forma más moderna y actual de gestionarla), _async/await_ o _top-level await_ (una variación de la anterior, donde no es necesario usar _async_).
+Existen varias formas de gestionar la asincronía: mediante _callbacks_ (la forma más clásica de gestionar la asincronía en JavaScript), promesas (una forma más moderna y actual de gestionarla), _async/await_ o _top-level await_ (una variación de la anterior, donde no es necesario usar _async_).
 
  Es habitual que existan múltiples tareas asíncronas, dichas tareas puede que terminen resueltas o rechazadas e incluso que dependan de otras, por lo que deben respetar un cierto orden. Además, también es usual que no se conozca previamente cuanto tiempo van a tardar en finalizar, por lo que será de gran relevancia estar provisto de un mecanismo que permita controlar todos estos factores. Aquí es donde entra la utilización de las promesas, previamente explicadas en el punto anterior. Todo ello se pone en relación con el _event loop_, el encargado de implementar dichas operaciones asíncronas. 
 
@@ -99,7 +99,7 @@ hello('bar');
 // Hello bar
 // Hello Foo
 ```
-Lo primero que se invoca es el metodo setTimeout(), siendo enviado del call stack a la Web Api, en la que permanence hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut() (0 milisegundos). Una vez transcurrido ese tiempo, es enviada al callback queue. En el momento en el que el método setTimout() abadona el call stack, se produce la llamada de la función hello(), ejecutándose y mostrando el string "Hello bar" por consola. Y por último, cuando el call stack se quede vacío, la función asíncrona situada en el call back queue es enviada al call stack, ejecutándose y mostrando el  string "Hello Foo" por consola.
+Lo primero que se invoca es el metodo `setTimeout`, siendo enviado del _call stack_ a la _Web API_, en la que permanence hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especificiado en el método `setTimeOut` (0 milisegundos). Una vez transcurrido ese tiempo, es enviado al _callback queue_. En el momento en el que el método `setTimout` abadona el _call stack_, se produce la llamada de la función `hello`, ejecutándose y mostrando por consola el _string_ "Hello bar". Y por último, cuando el _call stack_ se quede vacío, la función asíncrona situada en el _callback queue_ es enviada al _call stack_, ejecutándose y mostrando por consola el _string_ "Hello Foo".
 
 Fragmento 2:
 
