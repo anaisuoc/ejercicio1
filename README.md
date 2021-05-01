@@ -14,7 +14,7 @@ El modelo de concurrencia de JavaScript es:
 Task A --> Task B --> Task C
 ```
 
-**- No bloqueante (non-blocking).** JavaScript es un lenguaje no bloqueante, lo que permite que las tareas que se lleven a cabo no se queden bloqueadas espezando a ser finalizadas. Evitando a su vez, que el thread no quede bloqueado en estado de espera. 
+**- No bloqueante (non-blocking).** JavaScript es un lenguaje no bloqueante, lo que permite que las tareas que se lleven a cabo no se queden bloqueadas esperando a ser finalizadas. Evitando a su vez, que el thread no quede bloqueado en estado de espera. 
 
 Por ejemplo: La creación de una función que realiza una tarea y que se activa en caso de que se produzca un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje blocking, se quedaría bloqueado esperando a que el usuario activase la tarea con un click, no se podrían seguir ejecutando las demás funciones. 
 
