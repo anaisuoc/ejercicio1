@@ -20,22 +20,6 @@ Por ejemplo: La creación de una función que se activa en caso de que se produz
 
 **- Asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con las demás.
 
-En el siguiente ejemplo se puede observar la asicronía de JavaScript. El orden en que imprime los strings por consola es: 'one', 'three' y 'two'. Esto es debido a que a pesar de que el timeout de la función anónima es 0, al llamar a una Web Api esta es enviada a la callback queue.
-
-```js
-function one(text_1) {
-  console.log(text_1);
-}
-one('one');
-
-setTimeout(() => one('two'), 0);
-
-function three(text_2) {
-  console.log(text_2);
-}
-three('three');
-```
-
 **- Concurrente (concurrent).** JavaScript es concurrente, lo que significa que tiene la habilidad para ejecutar dos o más procesos simultáneamente. Además, aclarar que, a diferencia del paralelismo, que varias tareas progresen simultáneamente no tiene por qué significar que sucedan al mismo tiempo.
 
 Pero, **¿cómo un lenguaje con un único hilo de ejecución puede ser no bloqueante, concurrente y asincrónico?** Esto es debido a que el modelo de concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
