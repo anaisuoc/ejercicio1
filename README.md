@@ -16,13 +16,11 @@ Task A --> Task B --> Task C
 
 **- No bloqueante (non-blocking).** JavaScript es un lenguaje no bloqueante, lo que permite que las tareas que se lleven a cabo no se queden bloqueadas esperando a ser finalizadas. Evitando a su vez, que el thread no quede bloqueado en estado de espera. 
 
-Por ejemplo: La creación de una función que realiza una tarea y que se activa en caso de que se produzca un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje blocking, se quedaría bloqueado esperando a que el usuario activase la tarea con un click, no se podrían seguir ejecutando las demás funciones. 
+Por ejemplo: La creación de una función que se activa en caso de que se produzca un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje blocking, se quedaría bloqueado esperando a que el usuario activase la tarea, no se podrían seguir ejecutando las demás funciones. 
 
-**- Asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con lo demás. Una vez se complete la operación en espera, la ejecuta.
+**- Asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con las demás.
 
-En el siguiente ejemplo se puede observar la asicronía de JavaScript. El orden en que lo imprime por consola es: 'one', 'three' y 'two'.
-
-El segundo string que se imprime por consola es 'three' y no 'two' debido a que si bien el timeout de la función anónima es 0,  al llamar a una Web Api esta es enviada a la callback queue.
+En el siguiente ejemplo se puede observar la asicronía de JavaScript. El orden en que imprime los strings por consola es: 'one', 'three' y 'two'. Esto es debido a que a pesar de que el timeout de la función anónima es 0, al llamar a una Web Api esta es enviada a la callback queue.
 
 ```js
 function one(text_1) {
@@ -38,20 +36,19 @@ function three(text_2) {
 three('three');
 ```
 
-**- Concurrente (concurrent).** Es la habilidad para ejecutar dos o más procesos simultáneamente. Que varias tareas progresen simultáneamente no tiene por qué significar que sucedan al mismo tiempo, a diferencia del paralelismo, en el cual dos o más tareas se ejecutan en el mismo instante de tiempo.
+**- Concurrente (concurrent).** JavaScript es concurrente, lo que significa que tiene la habilidad para ejecutar dos o más procesos simultáneamente. Además, aclarar que, a diferencia del paralelismo, que varias tareas progresen simultáneamente no tiene por qué significar que sucedan al mismo tiempo.
 
-Pero, **¿cómo puede un lenguaje con un único hilo de ejecución pueda ser no bloqueante, concurrente y asincrónico?** Esto es debido a que la concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
+Pero, **¿cómo un lenguaje con un único hilo de ejecución puede ser no bloqueante, concurrente y asincrónico?** Esto es debido a que el modelo de concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
-JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es parte de la arquitectura del motor de JavaScript y el encargado de implementar las operaciones asíncronas o el non-blocking. Debido al event loop JavaScript es un lenguaje dirigido por eventos, lo que significa que no existe un punto de comienzo ni uno final sino que el motor de javascript ejecuta tareas que estén en una pila de ejecución. 
+JavaScript funciona con un modelo de concurrencia basado en _event loop_. Es parte de la arquitectura del motor de JavaScript y el encargado de implementar las operaciones asíncronas o el non-blocking. Debido al event loop, JavaScript es un lenguaje dirigido por eventos, lo que significa que no existe un punto de comienzo ni uno final, sino que el motor de JavaScript ejecuta las tareas que se encuentren en la pila de ejecución. 
 
-Fases fundamentales para el funcionamiento del event loop:
+Fases fundamentales para el funcionamiento del  _event loop_:
 
-**- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Cuando se está a punto de ejecutar una función, esta es añadida al call stack. Si la función llama a su vez, a otra función, es agregada sobre la anterior. Y si en algún momento de la ejecución hay un error, este se imprimirá en la consola con un mensaje y el estado del call stack del momento en que ocurrió.
+**- Pila de ejecución(Call Stack).** Es una estructura de datos que apila de forma organizada las instruccones de un programa. Funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido. Las funciones que están a punto de ejecutarse son añadidas al call back, y si la función llama a su vez a otra función, es agregada sobre la anterior. Si se trabaja con operaciones asíncronas, estas poseen callbacks, que se ejecutarán una vez el proceso de la operación haya terminado y que se irán añadiendo al callback queue.
 
-**- Web APIs.** Adicionales al motor JavaScript, las Web APIS son provistas por los navegadores web, como DOM, AJAX, setTimeout, etc. Permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estos APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el espacio en el que se agregan y permanencen las llamadas a las Web APIs hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP o un temporizador. Una vez que se active una acción, se agrega una función de Callback a la Callback Queue.
-
+**- Web APIs.** Las Web APIS permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estas APIs, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el espacio en el que se agregan y permanencen las llamadas a las Web APIs hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP, etc. Una vez que se active esa acción, se agrega una función de Callback a la Callback Queue.
 
 **- Cola de tareas(Callback Queue).** En el Callback Queue se agregan los callback o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. También funciona según el principio LIFO, el último elemento que entra en la pila es el primero en ser atendido.
 
@@ -66,15 +63,15 @@ En el caso de una función recursiva, se produciría el llamado Overflowing. Com
 
 Por lo tanto, al igual que el resto del código, las tareas encoladas se quedarán bloqueadas sin poder ejecutarse. Son tareas que se ejecutan en segundo plano con el fin de no recargar el servidor, bien sea 1 segundo o 1 hora después de haber sido agregadas al Callback Queue.
 
-Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si misma recursivamente (práctica no recomendable) fuera una función asíncrona. Esto permitirçia que se agregara al Callback Queue, evitando que se apile en el Call Stack. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único Call Stack.
+Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si mismas recursivamente (práctica no recomendable) sea asíncrona. Esto permitiría que se agregara al Callback Queue y evitaría que se apilase en el Call Stack. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único Call Stack.
 
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
 
-Las promesas son objetos que permiten gestionar situaciones futuras en el flujo de ejecución de un programa. Como no se sabe cuándo va a estar disponible, todas las operaciones dependientes de ese valor, tendrán que posponerse en el tiempo. 
+Las promesas son objetos que permiten gestionar situaciones futuras en el flujo de ejecución de un programa. Como no se conoce cuándo va a estar disponible, todas las operaciones dependientes de ese valor, tendrán que posponerse en el tiempo.
 
 Las promesas se crean usando un constructor llamado Promise y pasándole una función que recibe dos parámetros, resolve y reject.
 
-Aunque en Javascript se introducen en el estándar en ES6, se vienen usando desde hace tiempo, ya que varias librerías las habían implementado para solucionar sus necesidades de una manera más elegante.
+Aunque en Javascript se introducen en el estándar en ES6, se vienen usando desde hace tiempo, varias librerías ya las habían implementado para solucionar sus necesidades de una manera más elegante.
 
 Los 3 posibles estados de una promesa son:
 
@@ -84,11 +81,11 @@ Los 3 posibles estados de una promesa son:
 
 **- Rechazada.** Promesa fallida. Pasará a estar rechazada en el momento que se llame al parámetro reject. Usualmente se lanza un error con el motivo de ese rechazo, ejecutándose la función que se ha introducido en el método .catch.
 
- Su relación con el event loop es que las promesas son un concepto para resolver el problema de asincronía de una forma mucho más elegante y práctica en JavaScript, y el event loop es el que se encarga de implementar las operaciones asíncronas. Esto facilita el control de flujos de datos asíncronos en una aplicación, ya que JavaScript solo puede ejecutar una acción al mismo tiempo.
-
+ Su relación con el event loop es que las promesas son objetos que permiten gestionar la asincronía en JavaScript de una forma más elegante y práctica (que, por ejemplo, utilizando funciones callbacks directamente), y el event loop es el que se encarga de implementar las operaciones asíncronas.
+ 
 #### PT1.5: ¿Qué es una función asíncrona? ¿Para que sirve? ¿Qué relación tiene con las promesas? ¿Qué relación tiene con el _event loop_? (0.4p)
 
-Las funciones asíncronas son aquellas que permiten devolver el control al programa antes de que hayan terminado mientras siguen operando en segundo plano.  Si una tarea de un programa queda bloqueada dentro de un proceso sincrónico, la aplicación completa debe esperar. En cambio con un proceso asíncrono, la aplicación puede continuar con otro trabajo hasta que la tarea potencialmente bloqueante o síncrona finaliza.
+Las funciones asíncronas son aquellas que tienen la capacidad de devolverle el control al programa antes de que se produzca su finalización, operándose en segundo plano.
 
 Las funciones asíncronas son de gran utilidad para:
 
@@ -98,7 +95,7 @@ Las funciones asíncronas son de gran utilidad para:
 
 En Javascript existen varias formas de gestionar la asincronía: mediante callbacks (la forma más clásica de gestionar la asincronía en Javascript), promesas (Una forma más moderna y actual de gestionar la asincronía.), async/await o top-level await (una variación de la anterior, donde no es necesario usar async).
 
- Es habitual que existan múltiples tareas asíncronas, dichas tareas puede que terminen resueltas o rechazadas e incluso que dependan de otras, por lo que deben respetar un cierto orden. Además, es habitual que no se conozca previamente cuanto tiempo va a tardar en terminar una tarea, por lo que es de gran importancia un mecanismo para controlar todos estos factores. Aquí es donde entra la utilización de las promesas, previamente explicadas en el punto anterior. Todo ello se pone en relación con el event loop, el encargado de implementar dichas operaciones asíncronas. 
+ Es habitual que existan múltiples tareas asíncronas, dichas tareas puede que terminen resueltas o rechazadas e incluso que dependan de otras, por lo que deben respetar un cierto orden. Además, también es usual que no se conozca previamente cuanto tiempo va a tardar en terminar una tarea, por lo que es de gran importancia un mecanismo para controlar todos estos factores. Aquí es donde entra la utilización de las promesas, previamente explicadas en el punto anterior. Todo ello se pone en relación con el event loop, el encargado de implementar dichas operaciones asíncronas. 
 
 
 ### PT2: Explica con tus propias palabras cómo procesa JavaScript los siguientes fragmentos de código y por qué. (1p)
@@ -116,7 +113,7 @@ hello('bar');
 // Hello bar
 // Hello Foo
 ```
-La función hello(), aún siendo lo primero que se define, lo primero que se invoca es el metodo setTimeout(), el cual es enviado del call stack a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut() (0 milisegundos).  Una vez transcurrido ese tiempo, es enviada al callback queue. En el momento que el método setTimout() abadona el call stack, se produce la llamada de la función hello(), ejecutándose y mostrando el string "Hello bar" por consola. En el momento en que el call stack esté vacío, la función asíncrona situada en el call back queue es enviada al call stack, ejecutándose y mostrando el  string "Hello Foo" por consola.
+Lo primero que se invoca es el metodo setTimeout(), siendo enviado del call stack a la Web Api, en la que permanence hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut() (0 milisegundos). Una vez transcurrido ese tiempo, es enviada al callback queue. En el momento en el que el método setTimout() abadona el call stack, se produce la llamada de la función hello(), ejecutándose y mostrando el string "Hello bar" por consola. Y por último, cuando el call stack se quede vacío, la función asíncrona situada en el call back queue es enviada al call stack, ejecutándose y mostrando el  string "Hello Foo" por consola.
 
 Fragmento 2:
 
@@ -143,7 +140,7 @@ setTimeout(function timeout4() {
 
 Todas son funciones asíncronas definidas dentro del método setTimeOut(). En primer lugar se invocan la función timeout1(); en segundo lugar, la función timeout2(); en tercer lugar, la función timeout3() y en último lugar, la función timeout4().
 
-A medida que las funciones asíncronas se van invocando son llamadas y enviadas a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut(). Una vez transcurrido ese tiempo, son enviadas al callback queue. En el momento en que el call stack esté vacío, las funciónes asíncrona son enviadas al call stack en el orden en el que fueron llegando al callback queue, pudiendo comenzar a ejecutarse. La primera función que se muestra por consola es timeout4, ya que es a la se le especificó el menor tiempo de las cuatro funciones para ejecutarse, y así sucesivamente.
+A medida que las funciones asíncronas son invocadas, son llamadas y enviadas a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut(). Una vez transcurrido ese tiempo, son enviadas al callback queue. En el momento en el que el call stack se quede vacío, son enviadas a dicho espacio por el orden en el que fueron llegando al callback queue, ejecutándose y monstrando por consola su string correspondiente. La primera función que se muestra por consola es timeout4, ya que es a la se le especificó el menor tiempo de las cuatro funciones. Y así sucesivamente, hasta llegar a la función timeout1(), con 2000 milisegundos de espera.
 
 ### PT3: Pregunta promesas (2p)
 
@@ -257,8 +254,7 @@ La aproximación de _callbacks_ ha sido durante mucho tiempo la más utilizada e
 - ¿Qué pasa si necesitamos los resultados de dos carreras?
 - ¿Cómo podemos crear una función que un _callback_ pasando dos resultados a la vez?
 
-
-Para obtener el resultado de dos carreras se necesita, en primer lugar, llamar a la funcion "listResultsCallback", y en su funcion de callback, invocarla de nuevo pasando por parametro el resultado de la primera carrera. Y por último, en el callback de esta ultima, pasar los resultados de ambas carreras.
+Para obtener el resultado de dos carreras se necesita, en primer lugar, llamar a la funcion "listResultsCallback", y en su funcion de callback, invocarla de nuevo pasando por parametro el resultado de la primera carrera. Y, en el callback de esta última, pasar los resultados de ambas carreras.
 
 ```js
 function list2ResultsCallback(callback) {
