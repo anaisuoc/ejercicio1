@@ -129,7 +129,7 @@ setTimeout(function timeout4() {
 
 En este fragmento, todas las funciones son asíncronas y están definidas dentro del método `setTimeout`. En primer lugar, se invoca la función `timeout1`; en segundo lugar, la función `timeout2`; en tercer lugar, la función `timeout3` y en último lugar, la función `timeout4`.
 
-A medida que las funciones asíncronas son invocadas, son llamadas y enviadas a las _Web APIs_, en las que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método `setTimeout`. Una vez transcurrido ese tiempo, son enviadas al _callback queue_. En el momento en que el _call stack_ quede vacío, son enviadas a dicho espacio por el orden en el que fueron llegando al _callback queue_, ejecutándose y monstrando por consola el _string_ correspondiente. `timeout4` es la primera función en ejecutarse y en mostrar por consola el _string_ "timeout4", ya que es a la se le especificó el menor tiempo de espera de las cuatro funciones. Y así sucesivamente, hasta llegar a la función `timeout1`, con 2000 milisegundos de espera.
+A medida que las funciones asíncronas son invocadas, son llamadas y enviadas a las _Web APIs_, en las que permanecen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especificado en el método `setTimeout`. Una vez transcurrido ese tiempo, son enviadas al _callback queue_. En el momento en que el _call stack_ quede vacío, son enviadas a dicho espacio por el orden en el que fueron llegando al _callback queue_, ejecutándose y mostrando por consola el _string_ correspondiente. `timeout4` es la primera función en ejecutarse y en mostrar por consola el _string_ "timeout4", ya que es a la que se le especificó el menor tiempo de espera de las cuatro funciones. Y así sucesivamente, hasta llegar a la función `timeout1`, con 2000 milisegundos de espera.
 
 
 ### PT3: Pregunta promesas (2p)
@@ -166,7 +166,7 @@ doSomething()
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta `doSomethingElse` y no recibe ningún parámetro del resultado de `doSomething`. Y por último, cuando la promesa `doSomethingElse` se resuelve se ejecuta `finalHandler` y recibe como parámentro el resultado de `doSomethingElse`.
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve, se ejecuta `doSomethingElse` y no recibe ningún parámetro del resultado de `doSomething`. Y, cuando la promesa `doSomethingElse` se resuelve, se ejecuta `finalHandler` y recibe como parámentro el resultado de `doSomethingElse`.
 
 ```
 doSomething
@@ -186,7 +186,7 @@ doSomething().then(function () {
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve se ejecuta `doSomethingElse` y no recibe ningún parámetro del resultado de `doSomething`. A su vez, se ejecute en paralelo (y no en serie) `finalHandler`, ya que no se realiza un return del resultado de `doSomethingElse`, simplemente se ejecuta.
+Primero se ejecuta `doSomething`, cuando la promesa `doSomething` se resuelve, se ejecuta `doSomethingElse` y no recibe ningún parámetro del resultado de `doSomething`. En paralelo a `doSomethingElse`, se ejecuta `finalHandler`, ya que no se realiza un _return_ del resultado de `doSomethingElse`, simplemente se ejecuta.
 
 ```
 doSomething
@@ -205,7 +205,7 @@ doSomething().then(doSomethingElse())
 
 Se ejecutará en este orden:
 
-Primero se ejecuta en paralelo `doSomething` y `doSomethingElse`, ya que `doSomethingElse` es una funcion que se invoca a la hora de preparar los argumentos. Cuando la promesa doSomething se resuelve se ejecuta `finalHandler` y recibe como parámetro el resultado de `doSomething`.
+Primero se ejecuta en paralelo `doSomething` y `doSomethingElse`, ya que `doSomethingElse` es una función que se invoca a la hora de preparar los argumentos. Cuando la promesa `doSomething` se resuelve, se ejecuta `finalHandler` y recibe como parámetro el resultado de `doSomething`.
 
 ```
 doSomething
@@ -223,7 +223,7 @@ doSomething().then(doSomethingElse)
 
 Se ejecutará en este orden:
 
-Primero se ejecuta `doSomething`, cuando la promesa doSomething se resuelve se ejecuta `doSomethingElse` y recibe como parámetro el resultado de `doSomething`. Y por último, cuando la promesa `doSomethingElse` se resuelve se ejecuta `finalHandler` y recibe como parámetro el resultado de `doSomethingElse`.
+Primero se ejecuta `doSomething`, cuando la promesa doSomething se resuelve, se ejecuta `doSomethingElse` y recibe como parámetro el resultado de `doSomething`. Y, cuando la promesa `doSomethingElse` se resuelve, se ejecuta `finalHandler` y recibe como parámetro el resultado de `doSomethingElse`.
 
 ```
 doSomething
