@@ -32,7 +32,7 @@ Fases fundamentales para el funcionamiento del  _event loop_:
 
 **- Pila de ejecución (_call stack_).** Es una estructura de datos que apila de forma organizada las instrucciones de un programa. Funciona según el principio LIFO (_Last In, First Out_), el último elemento que entra en la pila es el primero en ser atendido. Las funciones que están a punto de ejecutarse son añadidas al _callback queue_, y si la función llama a su vez a otra función, es agregada sobre la anterior. Si se trabaja con operaciones asíncronas, estas poseen _callbacks_ que se ejecutarán una vez que el proceso de la operación haya terminado, añadiéndose al _callback queue_.
 
-**- _Web APIs_.** Las Web APIS permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estas _APIs_, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el espacio en el que se agregan y permanencen las llamadas a las _Web APIs_ hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP, etc. Una vez que se active esa acción, la función de _callback_ es agregada al _callback queue_.
+**- _Web APIs_.** Las _Web APIS_ permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estas _APIs_, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el espacio en el que se agregan y permanecen las llamadas a las _Web APIs_ hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP, etc. Una vez que se active esa acción, la función de _callback_ es agregada al _callback queue_.
 
 **- Cola de tareas(_callback queue_).** En el _callback queue_ se agregan los _callbacks_ o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. También funciona según el principio LIFO (_Last In, First Out_), el último elemento que entra en la pila es el primero en ser atendido.
 
@@ -41,13 +41,13 @@ Fases fundamentales para el funcionamiento del  _event loop_:
 
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
 
-Si una función del stack tarda mucho tiempo o se llama a si misma recursivamente, el navegador no puede ejecutar ningún otro código, se quedaría bloqueado. La mayoría de los navegadores ante este escenario de bloqueo muestran un mensaje de alerta en el que sugieren detener la tarea con la página completa. 
+Si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente, el navegador no puede ejecutar ningún otro código, se quedaría bloqueado. La mayoría de los navegadores ante este escenario de bloqueo muestran un mensaje de alerta en el que sugieren detener la tarea con la página completa. 
 
-En el caso de una función recursiva, se produciría el llamado Overflowing. Comenzaría a llamarse a sí misma sin condiciones de terminación, agregándose a la Pila de ejecución una y otra vez y alcanzando el tamaño máximo de la misma. 
+En el caso de una función recursiva, se produciría el llamado _overflowing_. Comenzaría a llamarse a sí misma sin condiciones de terminación, agregándose al _call stack_ una y otra vez y alcanzando el tamaño máximo del mismo. 
 
-Por lo tanto, al igual que el resto del código, las tareas encoladas se quedarán bloqueadas sin poder ejecutarse. Son tareas que se ejecutan en segundo plano con el fin de no recargar el servidor, bien sea 1 segundo o 1 hora después de haber sido agregadas al Callback Queue.
+Por lo tanto, al igual que el resto del código, las tareas encoladas (_queue_) se quedarán bloqueadas sin poder ejecutarse. Son tareas que se ejecutan en segundo plano con el fin de no recargar el servidor, bien sea 1 segundo o 1 hora después de haber sido agregadas al _callback queue_.
 
-Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si mismas recursivamente (práctica no recomendable) sea asíncrona. Esto permitiría que se agregara al Callback Queue y evitaría que se apilase en el Call Stack. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único Call Stack.
+Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si mismas recursivamente (práctica no recomendable) sea asíncrona. Esto permitiría que se agregara al _callback queue_ y evitaría que se apilase en el _call stack_. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único _call stack_.
 
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
 
