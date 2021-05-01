@@ -73,13 +73,15 @@ Las funciones asíncronas son aquellas que tienen la capacidad de devolverle el 
 
 Las funciones asíncronas son de gran utilidad para:
 
-- Agilizar el proceso de ejecución, contribuyendo a tener una mejor respuesta en las aplicaciones y reduciendo el tiempo de espera del cliente
-- Evitar que se bloquee el hilo principal de ejecución.
+- Agilizar el proceso de ejecución, contribuyendo a tener una mejor respuesta en las aplicaciones y reduciendo el tiempo de espera del cliente.
+
+- Evitar que se bloquee el único hilo de ejecución de JavaScript.
+
 - Realizar tareas que tienen que esperar a que se produzca un determinado suceso (como puede ser un click del usuario), y reaccionar realizando otra tarea solo cuando dicho suceso ocurra.
 
-En Javascript existen varias formas de gestionar la asincronía: mediante callbacks (la forma más clásica de gestionar la asincronía en Javascript), promesas (Una forma más moderna y actual de gestionar la asincronía.), async/await o top-level await (una variación de la anterior, donde no es necesario usar async).
+Existen varias formas de gestionar la asincronía: mediante _callbacks_ (la forma más clásica de gestionar la asincronía en Javascript), promesas (una forma más moderna y actual de gestionarla), _async/await_ o _top-level await_ (una variación de la anterior, donde no es necesario usar _async_).
 
- Es habitual que existan múltiples tareas asíncronas, dichas tareas puede que terminen resueltas o rechazadas e incluso que dependan de otras, por lo que deben respetar un cierto orden. Además, también es usual que no se conozca previamente cuanto tiempo va a tardar en terminar una tarea, por lo que es de gran importancia un mecanismo para controlar todos estos factores. Aquí es donde entra la utilización de las promesas, previamente explicadas en el punto anterior. Todo ello se pone en relación con el event loop, el encargado de implementar dichas operaciones asíncronas. 
+ Es habitual que existan múltiples tareas asíncronas, dichas tareas puede que terminen resueltas o rechazadas e incluso que dependan de otras, por lo que deben respetar un cierto orden. Además, también es usual que no se conozca previamente cuanto tiempo van a tardar en finalizar, por lo que será de gran relevancia estar provisto de un mecanismo que permita controlar todos estos factores. Aquí es donde entra la utilización de las promesas, previamente explicadas en el punto anterior. Todo ello se pone en relación con el _event loop_, el encargado de implementar dichas operaciones asíncronas. 
 
 
 ### PT2: Explica con tus propias palabras cómo procesa JavaScript los siguientes fragmentos de código y por qué. (1p)
