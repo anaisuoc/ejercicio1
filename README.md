@@ -8,21 +8,21 @@
 
 El modelo de concurrencia de JavaScript es:
 
-**- De un solo hilo de ejecución(single-threaded).** Un hilo es la unidad básica de ejecución de un proceso, cada hilo solo puede realizar una tarea a la vez. JavScript es un single-threaded, aún con múltiples procesadores, solo puede ejecutar tareas en un solo hilo.
+**- De un solo hilo de ejecución (_single-threaded_).** Un hilo es la unidad básica de ejecución de un proceso, cada hilo solo puede realizar una tarea a la vez. JavaScript es un _single-threaded_, aún con múltiples procesadores, solo puede ejecutar tareas en un solo hilo.
 
 ```
 Task A --> Task B --> Task C
 ```
 
-**- No bloqueante (non-blocking).** JavaScript es un lenguaje no bloqueante, lo que permite que las tareas que se lleven a cabo no se queden bloqueadas esperando a ser finalizadas. Evitando a su vez, que el thread no quede bloqueado en estado de espera. 
+**- No bloqueante (_non-blocking_).** JavaScript es un lenguaje no bloqueante, lo que permite que las tareas que se lleven a cabo no se queden bloqueadas esperando a ser finalizadas. Esto también evitará que el _thread_ no quede bloqueado en estado de espera. 
 
-Por ejemplo: La creación de una función que se activa en caso de que se produzca un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje blocking, se quedaría bloqueado esperando a que el usuario activase la tarea, no se podrían seguir ejecutando las demás funciones. 
+Por ejemplo: La creación de una función que se activa en caso de que se produzca un determinado suceso, como puede ser un click de ratón del usuario. Si se tratase de un lenguaje _blocking_, se quedaría bloqueado esperando a que el usuario activase la tarea, no se podrían seguir ejecutando las demás funciones. 
 
-**- Asícrono (asynchronous).** La asincronía en Javascript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con las demás.
+**- Asícrono (_asynchronous_).** La asincronía en JavaScript es la capacidad de diferir una tarea para seguir ejecutando las demás. Esto es, si el programa se encuentra con una operación que va a llevar tiempo en completarse, deja que esta corra y continua con las demás.
 
-**- Concurrente (concurrent).** JavaScript es concurrente, lo que significa que tiene la habilidad para ejecutar dos o más procesos simultáneamente. Además, aclarar que, a diferencia del paralelismo, que varias tareas progresen simultáneamente no tiene por qué significar que sucedan al mismo tiempo.
+**- Concurrente (_concurrent_).** JavaScript es concurrente, lo que significa que tiene la habilidad para ejecutar dos o más procesos simultáneamente. Aclarar que la concurrencia no es lo mismo que el paralelismo, que varias tareas progresen simultáneamente, no tiene por qué significar que sucedan al mismo tiempo.
 
-Pero, **¿cómo un lenguaje con un único hilo de ejecución puede ser no bloqueante, concurrente y asincrónico?** Esto es debido a que el modelo de concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basada en un **bucle de eventos (event loop)**.
+Pero, **¿cómo un lenguaje con un único hilo de ejecución puede ser no bloqueante, concurrente y asíncrono?** Esto es debido a que el modelo de concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basado en un **bucle de eventos (_event loop_)**.
 
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
