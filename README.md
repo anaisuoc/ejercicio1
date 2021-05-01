@@ -33,9 +33,9 @@ Fases fundamentales para el funcionamiento del  _event loop_:
 
 **- _Web APIs_.** Las _Web APIS_ permiten que las aplicaciones se comuniquen y puedan aprovechar desarrollos ya construidos en lugar de tener que crearlos desde cero. Abstraen el código más complejo para proveer una sintaxis más fácil de usar. Además, el motor de JavaScript es independiente de todas estas _APIs_, es responsabilidad de cada ambiente de agregar esa funcionalidad extra. En el event loop es el espacio en el que se agregan y permanecen las llamadas a las _Web APIs_ hasta que se active una acción. La acción puede ser un evento de click, una solicitud HTTP, etc. Una vez que se active esa acción, la función de _callback_ es agregada al _callback queue_.
 
-**- Cola de tareas(_callback queue_).** En el _callback queue_ se agregan los _callbacks_ o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. También funciona según el principio LIFO (_Last In, First Out_), el último elemento que entra en la pila es el primero en ser atendido.
+**- Cola de tareas (_callback queue_).** En el _callback queue_ se agregan los _callbacks_ o funciones que se ejecutan una vez que las operaciones asíncronas hayan terminado. También funciona según el principio LIFO (_Last In, First Out_), el último elemento que entra en la pila es el primero en ser atendido.
 
-**- Bucle de eventos(_envent loop_).** Se encarga de revisar que el _call stack_ esté vacío para añadir lo que está dentro del _callback queue_ y ejecutarlo. 
+**- Bucle de eventos (_envent loop_).** Se encarga de revisar que el _call stack_ esté vacío para añadir lo que está dentro del _callback queue_ y ejecutarlo. 
 
 
 #### PT1.3: ¿Qué sucede con las tareas encoladas (_queue_) si una función del _stack_ tarda mucho tiempo o se llama a si misma recursivamente? (0.4p)
