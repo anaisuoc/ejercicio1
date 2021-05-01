@@ -244,7 +244,7 @@ La aproximación de _callbacks_ ha sido durante mucho tiempo la más utilizada e
 - ¿Qué pasa si necesitamos los resultados de dos carreras?
 - ¿Cómo podemos crear una función que un _callback_ pasando dos resultados a la vez?
 
-Para obtener el resultado de dos carreras se necesita, en primer lugar, llamar a la funcion "listResultsCallback", y en su funcion de callback, invocarla de nuevo pasando por parametro el resultado de la primera carrera. Y, en el callback de esta última, pasar los resultados de ambas carreras.
+Para obtener el resultado de dos carreras se necesita, en primer lugar, llamar a la función `listResultsCallback` y en su función de _callback_, invocarla de nuevo pasando por parámetro el resultado de la primera carrera. Y, en la función de _callback_ de esta última, pasar los resultados de ambas carreras.
 
 ```js
 function list2ResultsCallback(callback) {
