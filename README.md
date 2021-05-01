@@ -1,5 +1,3 @@
-# PJP PEC 2
-
 ## Preguntas Teóricas (5pts)
 
 ### PT1 Responde con tus propias palabras a las siguientes cuestiones: (2p)
