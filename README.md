@@ -24,6 +24,7 @@ Por ejemplo: La creación de una función que se activa en caso de que se produz
 
 Pero, **¿cómo un lenguaje con un único hilo de ejecución puede ser no bloqueante, concurrente y asíncrono?** Esto es debido a que el modelo de concurrencia en JavaScript no funciona de la misma forma que en otros lenguajes, sino que está basado en un **bucle de eventos (_event loop_)**.
 
+
 #### PT1.2: ¿Qué es el _event loop_? ¿Cuales son sus 4 fases fundamentales? (0.4p)
 
 JavaScript funciona con un modelo de concurrencia basado en un **bucle de eventos (_event loop_)**. Es parte de la arquitectura del motor de JavaScript y el encargado de implementar las operaciones asíncronas o el _non-blocking_. Debido al _event loop_, JavaScript es un lenguaje dirigido por eventos, lo que significa que no existe un punto de comienzo o final, sino que el motor del lenguaje ejecuta las tareas que se encuentren en la pila de ejecución (_call stack_). 
@@ -49,6 +50,7 @@ Por lo tanto, al igual que el resto del código, las tareas encoladas (_queue_) 
 
 Una solución para resolver este problema, es que la función que tarda mucho tiempo o se llama a si mismas recursivamente (práctica no recomendable) sea asíncrona. Esto permitiría que se agregara al _callback queue_ y evitaría que se apilase en el _call stack_. Utilizar una excesiva cantidad de código síncrono puede provoca una degradación muy notable en la reactividad de la aplicación. Hay que recordar que JavaScript presenta un único hilo de ejecución y un único _call stack_.
 
+
 #### PT1.4: ¿Qué es una promesa? ¿En que estados puede estar una promesa? ¿Para que sirve? ¿Qué relación tiene con el _event loop_? (0.4p)
 
 Las promesas son objetos que permiten gestionar situaciones futuras en el flujo de ejecución de un programa. Como no se conoce cuándo van a estar disponibles, todas las operaciones dependientes de ese valor, tendrán que posponerse en el tiempo.
@@ -66,6 +68,7 @@ Los tres posibles estados de una promesa son:
 **- Rechazada.** Promesa fallida. Pasará a estar rechazada en el momento que se llame al parámetro `reject`. Usualmente se lanza un error con el motivo de ese rechazo, ejecutándose la función que se ha introducido en el método `.catch`.
 
  Su relación con el _event loop_ es que las promesas son objetos que permiten gestionar la asincronía en JavaScript de una forma más elegante y práctica (que, por ejemplo, utilizando funciones _callbacks_ directamente), y el _event loop_ es el que se encarga de implementar las operaciones asíncronas.
+ 
  
 #### PT1.5: ¿Qué es una función asíncrona? ¿Para que sirve? ¿Qué relación tiene con las promesas? ¿Qué relación tiene con el _event loop_? (0.4p)
 
@@ -99,7 +102,8 @@ hello('bar');
 // Hello bar
 // Hello Foo
 ```
-Lo primero que se invoca es el metodo `setTimeout`, siendo enviado del _call stack_ a la _Web API_, en la que permanence hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especificiado en el método `setTimeOut` (0 milisegundos). Una vez transcurrido ese tiempo, es enviado al _callback queue_. En el momento en el que el método `setTimout` abadona el _call stack_, se produce la llamada de la función `hello`, ejecutándose y mostrando por consola el _string_ "Hello bar". Y por último, cuando el _call stack_ se quede vacío, la función asíncrona situada en el _callback queue_ es enviada al _call stack_, ejecutándose y mostrando por consola el _string_ "Hello Foo".
+
+Lo primero que se invoca es el método `setTimeout`, siendo enviado del _call stack_ a las _Web APIs_, en las que permanece hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especificiado en el método `setTimeOut` (0 milisegundos). Una vez transcurrido ese tiempo, es enviado al _callback queue_. En el momento en el que el método `setTimout` abandona el _call stack_, se produce la llamada de la función `hello`, ejecutándose y mostrando por consola el _string_ "Hello bar". Y por último, cuando el _call stack_ se quede vacío, la función asíncrona situada en el _callback queue_ es enviada al _call stack_, ejecutándose y mostrando por consola el _string_ "Hello Foo".
 
 Fragmento 2:
 
@@ -121,12 +125,12 @@ setTimeout(function timeout4() {
 //timeout2
 //timeout3
 //timeout1
-
 ```
 
-Todas son funciones asíncronas definidas dentro del método setTimeOut(). En primer lugar se invocan la función timeout1(); en segundo lugar, la función timeout2(); en tercer lugar, la función timeout3() y en último lugar, la función timeout4().
+En este fragmento, todas las funciones son asíncronas y están definidas dentro del método `setTimeout`. En primer lugar, se invoca la función `timeout1`; en segundo lugar, la función `timeout2`; en tercer lugar, la función `timeout3` y en último lugar, la función `timeout4`.
 
-A medida que las funciones asíncronas son invocadas, son llamadas y enviadas a la Web Api, en la que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método setTimeOut(). Una vez transcurrido ese tiempo, son enviadas al callback queue. En el momento en el que el call stack se quede vacío, son enviadas a dicho espacio por el orden en el que fueron llegando al callback queue, ejecutándose y monstrando por consola su string correspondiente. La primera función que se muestra por consola es timeout4, ya que es a la se le especificó el menor tiempo de las cuatro funciones. Y así sucesivamente, hasta llegar a la función timeout1(), con 2000 milisegundos de espera.
+A medida que las funciones asíncronas son invocadas, son llamadas y enviadas a las _Web APIs_, en las que permanencen hasta que se active una acción, en este caso, hasta que finalice el tiempo de espera especficiado en el método `setTimeout`. Una vez transcurrido ese tiempo, son enviadas al _callback queue_. En el momento en que el _call stack_ quede vacío, son enviadas a dicho espacio por el orden en el que fueron llegando al _callback queue_, ejecutándose y monstrando por consola el _string_ correspondiente. `timeout4` es la primera función en ejecutarse y en mostrar por consola el _string_ "timeout4", ya que es a la se le especificó el menor tiempo de espera de las cuatro funciones. Y así sucesivamente, hasta llegar a la función `timeout1`, con 2000 milisegundos de espera.
+
 
 ### PT3: Pregunta promesas (2p)
 
