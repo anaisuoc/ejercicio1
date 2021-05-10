@@ -4,8 +4,6 @@ Además versiones anteriores dan algunos problemas con algún bug solucionado en
 
 
 Descripción y enunciado
-
-
 En esta práctica se pretende desarrollar el backend de un portal de noticias y un API de consulta básico de manera similar a como lo hemos hecho en la PEC2 pero utilizando Laravel y sus herramientas asociadas.
 
 La entidad noticia dispondrá de los siguientes campos
